@@ -22,7 +22,7 @@ class FormSearch extends Component {
             .then(res => {
                
                 console.log(res)
-
+// eslint-disable-next-line
                 res.data.items.map(item => {
                     const book = {
                         id: item.id,
