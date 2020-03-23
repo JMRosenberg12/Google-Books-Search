@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
@@ -6,7 +7,7 @@ import Button from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
 
 
-const SavedBooks = () => {
+const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState({ items: [] });
   const [toggle, setToggle] = useState(false);
@@ -55,7 +56,7 @@ const SavedBooks = () => {
         >
        
         <Typography variant="h1" component="h2">
-          <span>Saved Books</span>
+          <span>Search for books</span>
           </Typography>
           
           <input
@@ -97,9 +98,9 @@ const SavedBooks = () => {
                   <p>{book.volumeInfo.description}</p>
                 </div>
                 <Button  
-                href="/saved"
+                href="/savedbooks"
                 color="primary"
-                border="soli"
+                border="solid"
                 >SAVE</Button>
          
               </div>
@@ -131,5 +132,4 @@ const SavedBooks = () => {
     </>
   );
 };
-export default SavedBooks;
-
+export default App
