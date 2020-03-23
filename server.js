@@ -1,26 +1,28 @@
-//Dependencies
-const
-    express = require("express"),
-    path = require("path"),
-    mongoose = require("mongoose"),
-    router = require("./routes"),
-    PORT = process.env.PORT || 3000,
-    app = express();
+const express = require("express");
 
-app
-    .use(express.static(path.join(__dirname, 'public'))) // Serve static content for the app from the "public" directory in the application directory.
-    .use(express.urlencoded({ extended: true })) // Parse application body as JSON
-    .use(express.json())
-    .use(router); // ROUTES
+const mongoose = require("mongoose");
+const routes = require("./routes");
+const app = express();
+const PORT = process.env.PORT || 3001;
 
+// Define middleware here
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+// Add routes, both API and view
+app.use(routes);
 
-// Configure Mongoose and Start the Server
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/googlebooks",
+  { useNewUrlParser: true },
+  { useUnifiedTopology: true }
+);
 
-const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/${process.env.MONGODB_LOCALDBName}`;
-
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => app.listen(PORT, () => console.log("App listening on PORT " + PORT)))
-    .catch((error) => console.error(error));
+// Start the API server
+app.listen(PORT, function () {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
