@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Search from './pages/Search/Search';
-import Save from './pages/Save/Save';
+import Search from './pages/search';
+import Save from './pages/save';
 import NavbarComp from './components/nav';
 import './App.css';
 
