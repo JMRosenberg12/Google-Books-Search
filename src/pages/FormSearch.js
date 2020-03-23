@@ -63,7 +63,7 @@ class FormSearch extends Component {
                 <Row>
                     <Col size="12">
                         <Jumbotron>
-                            <h1>Search for Books!</h1>
+                            <h1>Search for Books you like!</h1>
                             <input type="text" name="search" className="m-3 p-2" onChange={this.handleInputChange} placeholder="Book Name" /><br />
                         <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Search</button>
                         </Jumbotron>
