@@ -13,8 +13,8 @@ function App() {
         <NavbarComp />
         <Switch>
           <Route exact path="/" component={Search} />
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/save" component={Save} />
+          <Route exact path="/Search" component={Search} />
+          <Route exact path="/Save" component={Save} />
           <Route path="*" component={Search} />
         </Switch>
       </div>
