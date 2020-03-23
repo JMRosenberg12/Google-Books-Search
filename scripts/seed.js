@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Book = require("../models/book");
+const Book = require("../models");
 
 // Connect to the Mongo DB
 mongoose.connect(
