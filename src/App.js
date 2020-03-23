@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
-import FormSearch from "./pages/FormSearch";
+import Books from "./pages/books";
+import Detail from "./pages/detail";
+import NoMatch from "./pages/nomatch";
+import Nav from "./components/nav";
+import FormSearch from "./pages/formsearch";
 
 function App() {
   return (
