@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Books from "./pages/books";
 import Detail from "./pages/detail";
 import NoMatch from "./pages/nomatch";
@@ -17,7 +17,11 @@ function App() {
           <Route exact path="/books/:id" component={Detail} />
           <Route exact path="/search" component={FormSearch} />
           <Route component={NoMatch} />
+          <Redirect from = "/api" to = "http://localhost:4000">
+
+          </Redirect>
         </Switch>
+
       </div>
     </Router>
   );
