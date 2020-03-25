@@ -1,76 +1,104 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteBtn from "../components/deletebtn";
 import Jumbotron from "../components/jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/grid";
 import { List, ListItem } from "../components/list";
-//import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, TextArea, FormBtn } from "../components/form";
 
-class Books extends Component {
-  state = {
-    books: [],
-    title: "",
-    author: "",
-    description: ""
-  };
+function Books() {
+  // Setting our component's initial state
+  const [books, setBooks] = useState([])
+  const [formObject, setFormObject] = useState({})
 
-  componentDidMount() {
-    this.loadBooks();
-  }
+  // Load all books and store them with setBooks
+  useEffect(() => {
+    loadBooks()
+  }, [])
 
-  loadBooks = () => {
+  // Loads all books and sets them to books
+  function loadBooks() {
     API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", description: "" })
+      .then(res => 
+        setBooks(res.data)
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
+  // Deletes a book from the database with a given id, then reloads books from the db
+  function deleteBook(id) {
     API.deleteBook(id)
-      .then(res => this.loadBooks())
+      .then(res => loadBooks())
       .catch(err => console.log(err));
-  };
+  }
 
-  handleInputChange = event => {
+  // Handles updating component state when the user types into the input field
+  function handleInputChange(event) {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    setFormObject({...formObject, [name]: value})
   };
 
-  handleFormSubmit = event => {
+  // When the form is submitted, use the API.saveBook method to save the book data
+  // Then reload books from the database
+  function handleFormSubmit(event) {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
+    if (formObject.title && formObject.author) {
       API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        description: this.state.description
+        title: formObject.title,
+        author: formObject.author,
+        synopsis: formObject.synopsis
       })
-        .then(res => this.loadBooks())
+        .then(res => loadBooks())
         .catch(err => console.log(err));
     }
   };
 
-  render() {
     return (
       <Container fluid>
-        <Row>          
-          <Col size="12">
+        <Row>
+          <Col size="md-6">
+            <Jumbotron>
+              <h1>What Books Should I Read?</h1>
+            </Jumbotron>
+            <form>
+              <Input
+                onChange={handleInputChange}
+                name="title"
+                placeholder="Title (required)"
+              />
+              <Input
+                onChange={handleInputChange}
+                name="author"
+                placeholder="Author (required)"
+              />
+              <TextArea
+                onChange={handleInputChange}
+                name="synopsis"
+                placeholder="Synopsis (Optional)"
+              />
+              <FormBtn
+                disabled={!(formObject.author && formObject.title)}
+                onClick={handleFormSubmit}
+              >
+                Submit Book
+              </FormBtn>
+            </form>
+          </Col>
+          <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {books.length ? (
               <List>
-                {this.state.books.map(book => (
+                {books.map(book => (
                   <ListItem key={book._id}>
                     <Link to={"/books/" + book._id}>
                       <strong>
                         {book.title} by {book.author}
                       </strong>
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <DeleteBtn onClick={() => deleteBook(book._id)} />
                   </ListItem>
                 ))}
               </List>
@@ -82,6 +110,6 @@ class Books extends Component {
       </Container>
     );
   }
-}
+
 
 export default Books;
