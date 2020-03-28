@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Row, Container } from "../../components/grid";
-import { SavedCard } from "../../components/card";
-import API from "../../utils/API";
+import { Row, Container } from "../components/grid";
+import { SavedCard } from "../components/card";
+import API from "../utils/API";
 
 function Saved() {
 	const [books, setBooks] = useState([]);
