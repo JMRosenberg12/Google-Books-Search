@@ -50,13 +50,13 @@ const SavedResult = props => {
                   >
                     Delete Book
                   </button>
-                  {// eslint-disable-next-line 
+                  
                   <a href={savedbook.link} target="_blank"> 
                     <button className="viewBook btn btn-success">
                       View Book
                     </button>
                     
-                  </a>}
+                  </a>
                 </Row>
               </li>
             );
