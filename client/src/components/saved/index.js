@@ -51,7 +51,7 @@ const SavedResult = props => {
                     Delete Book
                   </button>
                   
-                  <a href={savedbook.link} target="_blank"> 
+                  <a href={savedbook.link} target="blank"> 
                     <button className="viewBook btn btn-success">
                       View Book
                     </button>

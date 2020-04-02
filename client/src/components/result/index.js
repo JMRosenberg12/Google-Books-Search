@@ -50,7 +50,7 @@ const SearchResult = props => {
                     Save Book
                   </button>
                   
-                  <a href={book.link} target="_blank">
+                  <a href={book.link} target="blank">
                     <button className="viewBook btn btn-success">
                       View Book
                     </button>
