@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Books from "./pages/books";
 import Detail from "./pages/detail";
 import NoMatch from "./pages/nomatch";
-import Nav from "./components/nav/nav";
+import Nav from "./components/nav";
+import FormSearch from "./pages/formsearch";
 
 function App() {
   return (
@@ -11,15 +12,11 @@ function App() {
       <div>
         <Nav />
         <Switch>
-          <Route exact path={["/", "/books"]}>
-            <Books />
-          </Route>
-          <Route exact path="/books/:id">
-            <Detail />
-          </Route>
-          <Route>
-            <NoMatch />
-          </Route>
+          <Route exact path="/" component={Books} />
+          <Route exact path="/books" component={Books} />
+          <Route exact path="/books/:id" component={Detail} />
+          <Route exact path="/search" component={FormSearch} />
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>

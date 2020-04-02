@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from "./utils/API";
 import Book from "./components/book";
-import { Col, Row, Container } from "../components/grid";
+import { Col, Row, Container } from "./components/grid";
 import Jumbotron from "./components/jumbotron";
 
 class FormSearch extends Component {
