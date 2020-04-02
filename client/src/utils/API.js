@@ -1,7 +1,5 @@
 import axios from "axios";
 
-// eslint-disable-next-line
-const URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 export default {
   // Gets all books

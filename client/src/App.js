@@ -1,10 +1,12 @@
+  
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/books";
-import Detail from "./pages/detail";
-import NoMatch from "./pages/nomatch";
+import SaveBooks from "./pages/saved";
+import SearchBooks from "./pages/books";
+// import NoMatch from "./pages/NoMatch";
 import Nav from "./components/nav/nav";
-import FormSearch from "./pages/formsearch";
+// import Footer from "./components/Footer";
+// import "./App.css";
 
 function App() {
   return (
@@ -12,12 +14,12 @@ function App() {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Books} />
-          <Route exact path="/books" component={Books} />
-          <Route exact path="/books/:id" component={Detail} />
-          <Route exact path="/search" component={FormSearch} />
-          <Route component={NoMatch} />
+          <Route exact path="/" component={SearchBooks} />
+          <Route exact path="/saved" component={SaveBooks} />
+          <Route exact path="/saved/:id" component={SaveBooks} />
+          {/* <Route component={NoMatch} />  */}
         </Switch>
+        {/* <Footer /> */}
       </div>
     </Router>
   );

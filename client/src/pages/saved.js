@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { Row, Container } from "../components/grid";
-import { SavedCard } from "../components/card";
+import React, { Component } from "react";
 import API from "../utils/API";
+import Jumbotron from "../components/jumbotron";
+import { Container } from "../components/grid";
+import SavedResult from "../components/saved";
 
-function Saved() {
-	const [books, setBooks] = useState([]);
+class SaveBook extends Component {
+  state = {
+    savedBooks: []
+  };
 
-	useEffect(() => {
-		loadBooks();
-	}, []);
+  //when this component mounts, grab all books that were save to the database
+  componentDidMount() {
+    API.getBooks()
+      .then(res => this.setState({ savedBooks: res.data }))
+      .catch(err => console.log(err));
+  }
 
-	const loadBooks = () => {
-		API.getBooks()
-			.then(res => setBooks(res.data))
-			.catch(err => console.log(err));
-	};
+  //function to remove book by id
+  handleDeleteButton = id => {
+    API.deleteBook(id)
+      .then(res => this.componentDidMount())
+      .catch(err => console.log(err));
+  };
 
-	// pass delete function to SavedCard as prop, then call it when the delete button is clicked
-	const handleDelete = (id) => {
-		API.deleteBook(id)
-		loadBooks();
-	}
-
-	const renderBooks = () => {
-		return (
-			<div className="results">
-				{books.map(book => {
-					return <SavedCard book={book} handleDelete={handleDelete} />;
-				})}
-			</div>
-		);
-	};
-
-	return (
-		<Container>
-			<Row>
-				{books.length ? 
-					<div className="results">
-						<h3>Saved Books</h3>
-						<div className="resultsContainer">{renderBooks()}</div>
-					</div>
-				: <h3>No saved books.</h3>}
-			</Row>
-		</Container>
-	);
+  render() {
+    return (
+      <Container fluid className="container">
+        <Jumbotron>
+          <h1 className="text-black">Your Saved Books</h1>
+        </Jumbotron>
+        <Container>
+          <SavedResult
+            savedBooks={this.state.savedBooks}
+            handleDeleteButton={this.handleDeleteButton}
+          />
+        </Container>
+      </Container>
+    );
+  }
 }
 
-export default Saved;
+export default SaveBook;
