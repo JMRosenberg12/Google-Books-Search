@@ -1,7 +1,6 @@
 import React from "react";
 // import "./style.css";
 import { Row, Col } from "../grid";
-// eslint-disable-next-line
 const SavedResult = props => {
   return props.savedBooks.length === 0 ? (
     <div className="card">
@@ -51,12 +50,13 @@ const SavedResult = props => {
                   >
                     Delete Book
                   </button>
+                  {// eslint-disable-next-line 
                   <a href={savedbook.link} target="_blank"> 
                     <button className="viewBook btn btn-success">
                       View Book
                     </button>
                     
-                  </a>
+                  </a>}
                 </Row>
               </li>
             );
