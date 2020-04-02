@@ -10,7 +10,7 @@ function Nav() {
         <ul className="navbar-nav">
           <li className="nav-item" id="home">
             <a className="nav-link" href="/">
-              <button type="button" className="btn btn-info text-white">
+              <button type="button" className="btn btn-secondary text-white">
                 Search
               </button>
             </a>
