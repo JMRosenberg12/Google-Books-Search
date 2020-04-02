@@ -52,7 +52,7 @@ const SavedResult = props => {
                   </button>
                   
                  {// eslint-disable-next-line
-                  <a href={savedbook.link} target="_blank"> 
+                  <a href={savedbook.link} target=""> 
                     <button className="viewBook btn btn-success">
                       View Book
                     </button>   
