@@ -49,13 +49,13 @@ const SearchResult = props => {
                   >
                     Save Book
                   </button>
-                  
-                  <a href={book.link} target="">
+                    {// eslint-disable-next-line
+            <a href={book.link} target="_blank">  
                     <button className="viewBook btn btn-success">
                       View Book
                     </button>
                   </a>
-          
+         } 
                 </Row>
               </li>
             );
